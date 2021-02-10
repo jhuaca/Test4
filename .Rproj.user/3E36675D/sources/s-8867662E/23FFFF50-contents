@@ -1,0 +1,22 @@
+# Ex 1
+# Install (if necessary) and load the following packages. ####
+
+library(data.table)
+library(lubridate)
+library(Hmisc)
+library(myRFMpackage)
+
+# Read in the data transactions.csv. ####
+transactions <- fread("/Users/benutzer/Desktop/MSc UZH/Semester IV/R - a-non technical Introduction/Day 1/Exercises/transactions.csv")
+
+#Check the data format
+str(transactions)
+
+#date in POSIXct format. ####
+transactions[, TransDate:=dmy(TransDate, tz = "UTC")]
+
+#calculate RFM
+RFM <- RFMfunction(transactions, 20, 20, 60)
+
+#show results in console
+RFM
